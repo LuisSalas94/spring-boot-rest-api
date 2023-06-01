@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+// Define Base URL for REST API's
+@RequestMapping("students")
 public class StudentController {
     // http://localhost:8080/student
 //    @GetMapping("student")
@@ -39,7 +41,8 @@ public class StudentController {
 //    }
 
     // Spring Boot ResponseEntity
-    @GetMapping("students")
+    //@GetMapping("students")
+    @GetMapping
     public ResponseEntity<List<Student>> getStudents() {
         List<Student> students = new ArrayList<>();
         students.add(new Student("Tatiana", "Lopez", 1));
@@ -60,7 +63,8 @@ public class StudentController {
 //    }
 
     // Spring Boot ResponseEntity
-    @GetMapping("students/{id}/{first-name}/{last-name}")
+    //@GetMapping("students/{id}/{first-name}/{last-name}")
+    @GetMapping("{id}/{first-name}/{last-name}")
     public ResponseEntity<Student> studentPathVariable(@PathVariable("id") int id,
                                        @PathVariable("first-name") String firstName,
                                        @PathVariable("last-name") String lastName) {
@@ -78,7 +82,8 @@ public class StudentController {
 //    }
 
     // Spring Boot ResponseEntity
-    @GetMapping("students/query")
+    //@GetMapping("students/query")
+    @GetMapping("query")
     public ResponseEntity<Student> studentRequestVariable(@RequestParam int id,
                                           @RequestParam String firstName,
                                           @RequestParam String lastName) {
@@ -98,7 +103,8 @@ public class StudentController {
 //    }
 
     // Spring Boot ResponseEntity
-    @PostMapping("students/create")
+    //@PostMapping("students/create")
+    @PostMapping("create")
     //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
         System.out.println(student.getId());
@@ -116,7 +122,8 @@ public class StudentController {
 //        return student;
 //    }
 
-    @PutMapping("students/{id}/update")
+    //@PutMapping("students/{id}/update")
+    @PutMapping("{id}/update")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student, @PathVariable int id) {
         System.out.println(student.getFirstName());
         System.out.println(student.getLastName());
@@ -131,7 +138,8 @@ public class StudentController {
 //        return "Student deleted successfully";
 //    }
 
-    @DeleteMapping("students/{id}/delete")
+    //@DeleteMapping("students/{id}/delete")
+    @DeleteMapping("{id}/delete")
     public ResponseEntity<String> deleteStudent(@PathVariable int id) {
         System.out.println(id);
         return ResponseEntity.ok("Student deleted successfully");
